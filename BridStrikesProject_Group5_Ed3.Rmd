@@ -1,0 +1,672 @@
+---
+title: "Bird Strikes on AirCraft Analysis <br> <span style='font-size: 18px; color:
+  grey;'>by Group 5</span>"
+author:
+- Mingxi Li (li.mingxi1@northeastern.edu)
+- Si Wu (wu.si3@northeastern.edu)
+- Zheng Zheng (zheng.zheng2@northeastern.edu)
+- Jiawei Zhou (zhou.jiaw@northeastern.edu)
+output:
+  pdf_document:
+    toc: yes
+  html_notebook:
+    theme: cerulean
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+  html_document:
+    toc: yes
+    df_print: paged
+---
+
+## Introduction
+
+Bird strikes have been a matter of concern for the aviation industry since its inception. These events, which refer to the collision of a bird with an aircraft, can result in substantial financial losses and potential risks to safety. As the aviation industry grows, understanding and mitigating bird strikes becomes more crucial, especially considering the rise in global air traffic.
+
+In this project, our group - Group 5, dives deep into the data related to bird strikes.Our primary aim is to analyze the patterns of bird strikes on aircrafts across different years, especially focusing on various flight phases. By doing so, we hope to identify high-risk factors and periods associated with these incidents."
+
+With this analysis, we hope to contribute valuable insights that can assist airlines, pilots, and airport authorities in understanding the dynamics of bird strikes better. Our findings might pave the way for innovative solutions to tackle this persistent challenge in the aviation industry.
+
+Source data: FAA[1] The data for our analysis is sourced from a comprehensive database that logs bird strikes on aircrafts. This database provides detailed insights on the various factors and conditions under which these incidents occur, making it a rich source for our study
+
+## Build ERD Model and Relational Schema
+
+<div>
+
+1.  The conceptual model as a Crow's Foot ERD - Zheng Zheng
+
+    ![](Conceptual%20Model%20(crow's%20foot).png)
+
+2.  The logical model as a Crow's Feet Relational Schema - Zheng Zheng
+
+    ![](Database%20ER%20diagram%20(crow's%20foot).png)
+
+</div>
+
+## Create the database
+
+###Connect to MySQL server (Remember to change the password for your own laptop)
+
+```{r}
+# Load the required library
+library(RMySQL)
+
+# Settings
+host <- "localhost"
+port <- 3306
+user <- "root"
+password <- ""
+
+# Create a connection
+con <- dbConnect(MySQL(), user='root', 
+                 password='Zz19920608!', host='localhost')
+
+# Create the database
+dbGetQuery(con, "DROP DATABASE IF EXISTS BirdStrikesOnAircraft")
+dbGetQuery(con, "CREATE DATABASE BirdStrikesOnAircraft")
+
+# Use the created database
+dbGetQuery(con, "USE BirdStrikesOnAircraft")
+
+```
+
+### Create the tables
+
+```{r}
+# 9. Airline/Operator
+dbGetQuery(con, "DROP TABLE IF EXISTS Airline_Operator")
+dbGetQuery(con, "CREATE TABLE Airline_Operator(
+    Airline_OperatorID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    Airline_OperatorName VARCHAR(255)
+)")
+
+# 1. Aircraft
+dbGetQuery(con, "DROP TABLE IF EXISTS Aircraft")
+dbGetQuery(con, "CREATE TABLE Aircraft(
+    AircraftID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    Type VARCHAR(255),
+    Make_Model VARCHAR(255),
+    Number_of_Engines INTEGER,
+    Airline_OperatorID INTEGER,
+    IsLarge VARCHAR(255),
+    FOREIGN KEY (Airline_OperatorID) REFERENCES Airline_Operator(Airline_OperatorID)
+)")
+
+# 2. Airport
+dbGetQuery(con, "DROP TABLE IF EXISTS Airport")
+dbGetQuery(con, "CREATE TABLE Airport(
+    AirportID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    AirportName VARCHAR(255)
+)")
+
+# 5. SkyConditions
+dbGetQuery(con, "DROP TABLE IF EXISTS SkyConditions")
+dbGetQuery(con, "CREATE TABLE SkyConditions(
+    SkyConditionID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    SkyConditionDescription VARCHAR(255)
+)")
+
+# 4. FlightPhase
+dbGetQuery(con, "DROP TABLE IF EXISTS FlightPhase")
+dbGetQuery(con, "CREATE TABLE FlightPhase(
+    PhaseID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    FlightPhaseDescription VARCHAR(255)
+)")
+
+# 6. Wildlife
+dbGetQuery(con, "DROP TABLE IF EXISTS Wildlife")
+dbGetQuery(con, "CREATE TABLE Wildlife(
+    WildlifeID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    WildlifeSpecies VARCHAR(255),
+    WildlifeSize VARCHAR(50)
+)")
+
+# 8. Effect
+dbGetQuery(con, "DROP TABLE IF EXISTS Effect")
+dbGetQuery(con, "CREATE TABLE Effect(
+    EffectID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    EffectDescription VARCHAR(255)
+)")
+
+# 3. Flight
+dbGetQuery(con, "DROP TABLE IF EXISTS Flight")
+dbGetQuery(con, "CREATE TABLE Flight(
+    FlightID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    FlightDate DATE,
+    OriginState VARCHAR(255),
+    AircraftID INTEGER,
+    AirportID INTEGER,
+    FOREIGN KEY (AircraftID) REFERENCES Aircraft(AircraftID),
+    FOREIGN KEY (AirportID) REFERENCES Airport(AirportID)
+)")
+
+# 7. BirdStrikeEvent
+dbGetQuery(con, "DROP TABLE IF EXISTS BirdStrikeEvent")
+dbGetQuery(con, "CREATE TABLE BirdStrikeEvent(
+    RecordID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    WildlifeID INTEGER,
+    FlightID INTEGER,
+    PhaseID INTEGER,
+    SkyConditionID INTEGER,
+    EffectID INTEGER,
+    IndicatedDamage BOOLEAN,
+    AltitudeBin VARCHAR(100),
+    FeetAboveGround INTEGER,
+    NumberOfPeopleInjured INTEGER,
+    Costs DECIMAL(12,2),
+    PilotWarned VARCHAR(100),
+    RemainsCollected VARCHAR(100),
+    RemainsSent VARCHAR(100),
+    Remark TEXT,
+    NumberStruckRange VARCHAR(100),
+    NumberStruckActual INTEGER,
+    FOREIGN KEY (WildlifeID) REFERENCES Wildlife(WildlifeID),
+    FOREIGN KEY (FlightID) REFERENCES Flight(FlightID),
+    FOREIGN KEY (PhaseID) REFERENCES FlightPhase(PhaseID),
+    FOREIGN KEY (SkyConditionID) REFERENCES SkyConditions(SkyConditionID),
+    FOREIGN KEY (EffectID) REFERENCES Effect(EffectID)
+)")
+
+```
+
+## Load the Bird Strikes CSV file into R and populate the tables with the data.
+
+```{r}
+library(DBI)
+
+# Load data from CSV
+csv_data <- read.csv('BirdStrikesData.csv')
+```
+
+```{r}
+colnames(csv_data)
+```
+
+```{r}
+names(csv_data) <- c(
+  "RecordID", 
+  "Type", 
+  "AirportName", 
+  "AltitudeBin", 
+  "Make_Model", 
+  "NumberStruckRange", 
+  "NumberStruckActual", 
+  "EffectDescription", 
+  "FlightDate", 
+  "IndicatedDamage", 
+  "NumberOfEngines", 
+  "Airline_OperatorName", 
+  "OriginState", 
+  "FlightPhaseDescription", 
+  "Precipitation", 
+  "RemainsCollected", 
+  "RemainsSent",
+  "Remarks",
+  "WildlifeSize",
+  "SkyConditionDescription",
+  "WildlifeSpecies",
+  "PilotWarned",
+  "Costs",
+  "FeetAboveGround",
+  "NumberOfPeopleInjured",
+  "IsLarge"
+)
+
+```
+
+```{r}
+# Aircraft Table
+csv_data$Type <- as.character(csv_data$Type)
+csv_data$Make_Model <- as.character(csv_data$Make_Model)
+csv_data$NumberOfEngines <- as.integer(as.character(csv_data$NumberOfEngines))
+csv_data$IsLarge <- as.character(csv_data$IsLarge)
+
+# Airport Table
+csv_data$AirportName <- as.character(csv_data$AirportName)
+
+# Flight Table
+csv_data$FlightDate <- as.Date(csv_data$FlightDate, format="%m/%d/%Y")
+csv_data$OriginState <- as.character(csv_data$OriginState)
+
+# FlightPhase Table
+csv_data$FlightPhaseDescription <- as.character(csv_data$FlightPhaseDescription)
+
+# SkyConditions Table
+csv_data$SkyConditionDescription <- as.character(csv_data$SkyConditionDescription)
+
+# Wildlife Table
+csv_data$WildlifeSpecies <- as.character(csv_data$WildlifeSpecies)
+csv_data$WildlifeSize <- as.character(csv_data$WildlifeSize)
+
+# BirdStrikeEvent Table
+csv_data$AltitudeBin <- as.character(csv_data$AltitudeBin)
+csv_data$FeetAboveGround <- as.integer(as.character(csv_data$FeetAboveGround))
+csv_data$NumberOfPeopleInjured <- as.integer(as.character(csv_data$NumberOfPeopleInjured))
+csv_data$Costs <- as.numeric(as.character(csv_data$Costs))
+csv_data$PilotWarned <- as.character(csv_data$PilotWarned)
+csv_data$RemainsCollected <- as.character(csv_data$RemainsCollected)
+csv_data$RemainsSent <- as.character(csv_data$RemainsSent)
+csv_data$Remarks <- as.character(csv_data$Remarks)
+csv_data$NumberStruckRange <- as.character(csv_data$NumberStruckRange)
+csv_data$NumberStruckActual <- as.integer(as.character(csv_data$NumberStruckActual))
+csv_data$IndicatedDamage <- ifelse(csv_data$IndicatedDamage == 'Caused damage', 1, 0)
+
+# Effect Table
+csv_data$EffectDescription <- as.character(csv_data$EffectDescription)
+
+# Airline/Operator Table
+csv_data$Airline_OperatorName <- as.character(csv_data$Airline_OperatorName)
+
+```
+
+```{r}
+# Identify columns with categorical data 
+categorical_cols <- c(
+  "Type", "AirportName", "AltitudeBin", "Make_Model", "EffectDescription", 
+  "OriginState", "FlightPhaseDescription", "Precipitation", "RemainsCollected", 
+  "RemainsSent", "Remarks", "WildlifeSize", "SkyConditionDescription", "WildlifeSpecies", 
+  "PilotWarned", "IsLarge", "Airline_OperatorName", "NumberStruckRange"
+)
+
+# Replace NA values with 'Unknown' for these columns
+csv_data[categorical_cols] <- lapply(csv_data[categorical_cols], function(col) {
+    ifelse(is.na(col)| col == "", 'Unknown', col)
+})
+
+# Identify columns with numerical data
+numerical_cols <- c(
+  "RecordID", "NumberStruckActual", "NumberOfEngines", "Costs", 
+  "FeetAboveGround", "NumberOfPeopleInjured"
+)
+
+# Replace 'Unknown' or other non-date values in FlightDate with '1900-01-01'
+csv_data$FlightDate[csv_data$FlightDate == ""  | !grepl("^\\d{4}-\\d{2}-\\d{2}$", csv_data$FlightDate)] <- '1900-01-01'
+
+# Replace NA values with 0 for these columns
+csv_data[numerical_cols] <- lapply(csv_data[numerical_cols], function(col) {
+    ifelse(is.na(col)| col == "", 0, col)
+})
+
+```
+
+```{r}
+# Airline/Operator IDs
+airline_operator_ids <- unique(csv_data$Airline_OperatorName)
+airline_operator_ids <- data.frame(Airline_OperatorID = seq_along(airline_operator_ids),
+                                   Airline_OperatorName = airline_operator_ids)
+
+# Aircraft IDs
+aircraft_data <- unique(csv_data[, c("Type", "Make_Model", "NumberOfEngines", "Airline_OperatorName", "IsLarge")])
+aircraft_data <- merge(aircraft_data, airline_operator_ids, by="Airline_OperatorName")
+aircraft_data$AircraftID <- seq_along(aircraft_data$Type)
+
+# Airport IDs
+airport_ids <- unique(csv_data$AirportName)
+airport_ids <- data.frame(AirportID = seq_along(airport_ids), AirportName = airport_ids)
+
+# FlightPhase IDs
+flight_phase_ids <- unique(csv_data$FlightPhaseDescription)
+flight_phase_ids <- data.frame(PhaseID = seq_along(flight_phase_ids), FlightPhaseDescription = flight_phase_ids)
+
+# SkyConditions IDs
+sky_condition_ids <- unique(csv_data$SkyConditionDescription)
+sky_condition_ids <- data.frame(SkyConditionID = seq_along(sky_condition_ids), SkyConditionDescription = sky_condition_ids)
+
+# Wildlife IDs
+wildlife_data <- unique(csv_data[, c("WildlifeSpecies", "WildlifeSize")])
+wildlife_data$WildlifeID <- seq_along(wildlife_data$WildlifeSpecies)
+
+# Effect IDs
+effect_ids <- unique(csv_data$EffectDescription)
+effect_ids <- data.frame(EffectID = seq_along(effect_ids), EffectDescription = effect_ids)
+
+# Generating FlightID for each row in the csv_data dataframe
+csv_data$FlightID <- seq(1, nrow(csv_data))
+
+```
+
+```{r}
+# Merge Airline/Operator IDs
+csv_data <- merge(csv_data, airline_operator_ids, by="Airline_OperatorName", all.x = TRUE)
+
+# Merge Aircraft IDs
+csv_data <- merge(csv_data, aircraft_data[, c("Type", "Make_Model", "NumberOfEngines", "Airline_OperatorID", "IsLarge", "AircraftID")],
+                 by = c("Type", "Make_Model", "NumberOfEngines", "Airline_OperatorID", "IsLarge"), all.x = TRUE)
+
+# Merge Airport IDs
+csv_data <- merge(csv_data, airport_ids, by="AirportName", all.x = TRUE)
+
+# Merge FlightPhase IDs
+csv_data <- merge(csv_data, flight_phase_ids, by="FlightPhaseDescription", all.x = TRUE)
+
+# Merge SkyConditions IDs
+csv_data <- merge(csv_data, sky_condition_ids, by="SkyConditionDescription", all.x = TRUE)
+
+# Merge Wildlife IDs
+csv_data <- merge(csv_data, wildlife_data, by = c("WildlifeSpecies", "WildlifeSize"), all.x = TRUE)
+
+# Merge Effect IDs
+csv_data <- merge(csv_data, effect_ids, by="EffectDescription", all.x = TRUE)
+
+```
+
+```{r}
+# Clear data from tables
+dbGetQuery(con, "DELETE FROM BirdStrikeEvent")
+dbGetQuery(con, "DELETE FROM Flight")
+dbGetQuery(con, "DELETE FROM Wildlife")
+dbGetQuery(con, "DELETE FROM SkyConditions")
+dbGetQuery(con, "DELETE FROM FlightPhase")
+dbGetQuery(con, "DELETE FROM Effect")
+dbGetQuery(con, "DELETE FROM Aircraft")
+dbGetQuery(con, "DELETE FROM Airport")
+dbGetQuery(con, "DELETE FROM Airline_Operator")
+
+```
+
+```{r}
+#1. Airline/Operator
+for(i in 1:nrow(airline_operator_ids)) {
+  query <- sprintf("INSERT INTO Airline_Operator (Airline_OperatorID, Airline_OperatorName) VALUES (%d, '%s')",
+                   airline_operator_ids$Airline_OperatorID[i], airline_operator_ids$Airline_OperatorName[i])
+  dbGetQuery(con, query)
+}
+
+```
+
+```{r}
+# Insert data into Airline/Operator
+for(i in 1:nrow(aircraft_data)) {
+  query <- sprintf("INSERT INTO Aircraft (AircraftID, Type, Make_Model, Number_of_Engines, Airline_OperatorID, IsLarge) VALUES (%d, '%s', '%s', %d, %d, '%s')",
+                   aircraft_data$AircraftID[i], aircraft_data$Type[i], aircraft_data$Make_Model[i], aircraft_data$NumberOfEngines[i],
+                   aircraft_data$Airline_OperatorID[i], aircraft_data$IsLarge[i])
+  dbGetQuery(con, query)
+}
+
+
+```
+
+```{r}
+# Insert data into Airport
+dbGetQuery(con, "DELETE FROM Airport")
+escape_quotes <- function(string) {
+  return(gsub("'", "''", string))
+}
+
+# Insert data into Airport
+for(i in 1:nrow(airport_ids)) {
+  airport_name_escaped <- escape_quotes(airport_ids$AirportName[i])
+  query <- sprintf("INSERT INTO Airport (AirportID, AirportName) VALUES (%d, '%s')", 
+                   airport_ids$AirportID[i], airport_name_escaped)
+  dbGetQuery(con, query)
+}
+```
+
+```{r}
+# 4. FlightPhase Table
+for(i in 1:nrow(flight_phase_ids)) {
+  query <- sprintf("INSERT INTO FlightPhase (PhaseID, FlightPhaseDescription) VALUES (%d, '%s')", 
+                   flight_phase_ids$PhaseID[i], flight_phase_ids$FlightPhaseDescription[i])
+  dbGetQuery(con, query)
+}
+
+```
+
+```{r}
+# 5. SkyConditions Table
+for(i in 1:nrow(sky_condition_ids)) {
+  query <- sprintf("INSERT INTO SkyConditions (SkyConditionID, SkyConditionDescription) VALUES (%d, '%s')", 
+                   sky_condition_ids$SkyConditionID[i], sky_condition_ids$SkyConditionDescription[i])
+  dbGetQuery(con, query)
+}
+
+```
+
+```{r}
+#6. Wildlife Table
+escape_quotes <- function(string) {
+  return(gsub("'", "''", string))
+}
+
+for(i in 1:nrow(wildlife_data)) {
+  species_escaped <- escape_quotes(wildlife_data$WildlifeSpecies[i])
+  size_escaped <- escape_quotes(wildlife_data$WildlifeSize[i])
+
+  query <- sprintf("INSERT INTO Wildlife (WildlifeID, WildlifeSpecies, WildlifeSize) VALUES (%d, '%s', '%s')", 
+                   wildlife_data$WildlifeID[i], species_escaped, size_escaped)
+  dbGetQuery(con, query)
+}
+
+```
+
+```{r}
+
+
+# Insert data into Flight table
+for(i in 1:nrow(csv_data)) {
+  query <- sprintf("INSERT INTO Flight (FlightID, FlightDate, OriginState, AircraftID, AirportID) VALUES (%d, '%s', '%s', %d, %d)", 
+                   csv_data$FlightID[i], csv_data$FlightDate[i], escape_quotes(csv_data$OriginState[i]), csv_data$AircraftID[i], csv_data$AirportID[i])
+  dbGetQuery(con, query)
+}
+```
+
+```{r}
+#Insert the data into the Effect table
+for(i in 1:nrow(effect_ids)) {
+    query <- sprintf("INSERT INTO Effect (EffectID, EffectDescription) VALUES (%d, '%s')", 
+                     effect_ids$EffectID[i], effect_ids$EffectDescription[i])
+    dbGetQuery(con, query)
+}
+```
+
+```{r}
+# Insert data into BirdStrikeEvent
+sanitize_string <- function(input_string) {
+  # Replace single quotes with two single quotes for SQL
+  output_string <- gsub("'", "''", input_string)
+  
+  # Add more replacements as needed
+  
+  return(output_string)
+}
+
+# Apply the function to character columns in your dataframe
+char_cols <- sapply(csv_data, is.character)
+csv_data[char_cols] <- lapply(csv_data[char_cols], sanitize_string)
+
+dbGetQuery(con, "DELETE FROM BirdStrikeEvent")
+for(i in 1:nrow(csv_data)) {
+  query <- sprintf("INSERT INTO BirdStrikeEvent (RecordID, WildlifeID, FlightID, PhaseID, SkyConditionID, EffectID, IndicatedDamage, AltitudeBin, FeetAboveGround, NumberOfPeopleInjured, Costs, PilotWarned, RemainsCollected, RemainsSent, Remark, NumberStruckRange, NumberStruckActual) VALUES (%d, %d, %d, %d, %d, %d, %d, '%s', %d, %d, %.2f, '%s', '%s', '%s', '%s', '%s', %d)", 
+                   csv_data$RecordID[i], csv_data$WildlifeID[i], csv_data$FlightID[i], csv_data$PhaseID[i], csv_data$SkyConditionID[i], csv_data$EffectID[i], csv_data$IndicatedDamage[i], csv_data$AltitudeBin[i], csv_data$FeetAboveGround[i], csv_data$NumberOfPeopleInjured[i], csv_data$Costs[i], csv_data$PilotWarned[i], csv_data$RemainsCollected[i], csv_data$RemainsSent[i], csv_data$Remarks[i], csv_data$NumberStruckRange[i], csv_data$NumberStruckActual[i])
+  dbGetQuery(con, query)
+}
+
+
+```
+
+## Analysis Tasks - Si Wu and Jiawei Zhou
+
+# Create a SQL query against your database to find the number of bird strike incidents for each airline upon take-off or climb. Include all airlines. You may either use a {sql} code chunk or an R function to execute the query. It must be a single query.
+
+```{sql connection=con}
+SELECT 
+    ao.Airline_OperatorName AS Airline,
+    COUNT(*) AS NumberOfIncidents
+FROM 
+    BirdStrikeEvent bse
+JOIN 
+    Flight f ON bse.FlightID = f.FlightID
+JOIN 
+    Aircraft ac ON f.AircraftID = ac.AircraftID
+JOIN 
+    Airline_Operator ao ON ac.Airline_OperatorID = ao.Airline_OperatorID
+JOIN 
+    FlightPhase fp ON bse.PhaseID = fp.PhaseID
+WHERE 
+    fp.FlightPhaseDescription IN ('Take-Off', 'Climb')
+GROUP BY 
+    ao.Airline_OperatorName
+ORDER BY 
+    NumberOfIncidents DESC;
+
+```
+
+```{sql connection=con}
+
+SELECT AO.Airline_OperatorName AS Airline,
+       SUM(CASE WHEN BE.PhaseID IN (1, 2) THEN 1 ELSE 0 END) AS BirdStrikeCount
+FROM Airline_Operator AS AO
+LEFT JOIN Aircraft AS A ON AO.Airline_OperatorID = A.Airline_OperatorID
+LEFT JOIN Flight AS F ON A.AircraftID = F.AircraftID
+LEFT JOIN BirdStrikeEvent AS BE ON F.FlightID = BE.FlightID
+GROUP BY AO.Airline_OperatorName
+ORDER BY BirdStrikeCount DESC;
+```
+
+```{sql connection=con}
+SELECT * 
+FROM FlightPhase
+;
+```
+
+#### Create a SQL query against your database to find the airports that had the most bird strike incidents (during any flight phase). Include all airlines. You may either use a *{sql}* code chunk or an R function to execute the query. It must be a single query.
+
+```{sql connection=con}
+SELECT 
+    ap.AirportName AS Airport,
+    COUNT(*) AS NumberOfIncidents
+FROM 
+    BirdStrikeEvent bse
+JOIN 
+    Flight f ON bse.FlightID = f.FlightID
+JOIN 
+    Airport ap ON f.AirportID = ap.AirportID
+GROUP BY 
+    ap.AirportName
+ORDER BY 
+    NumberOfIncidents DESC;
+
+```
+
+#### Create a SQL query against your database to find the number of bird strike incidents by year. Include all airlines. You may either use a *{sql}* code chunk or an R function to execute the query. It must be a single query.
+
+```{sql connection=con}
+SELECT 
+    YEAR(f.FlightDate) AS Year,
+    COUNT(*) AS NumberOfStrikes
+FROM 
+    Flight f
+JOIN 
+    Aircraft a ON f.AircraftID = a.AircraftID
+JOIN 
+    Airline_Operator ao ON a.Airline_OperatorID = ao.Airline_OperatorID
+JOIN 
+    BirdStrikeEvent bse ON f.FlightID = bse.FlightID
+
+WHERE 
+    YEAR(f.FlightDate) <> 1900
+GROUP BY 
+    Year
+ORDER BY 
+    Year;
+
+```
+
+# Using the above data, build a column chart that visualizes the number of bird strikes incidents per year from 2008 to 2011 during take-off/climbing and during descent/approach/landing, so you can compare one versus the other. Adorn the graph with appropriate axis labels, titles, legend, data labels, etc.
+
+```{sql connection=con}
+SELECT 
+    YEAR(f.FlightDate) AS Year,
+    fp.FlightPhaseDescription,
+    COUNT(*) AS NumberOfIncidents
+FROM 
+    BirdStrikeEvent bse
+JOIN 
+    Flight f ON bse.FlightID = f.FlightID
+JOIN 
+    FlightPhase fp ON bse.PhaseID = fp.PhaseID
+WHERE 
+    YEAR(f.FlightDate) BETWEEN 2008 AND 2011
+    AND fp.FlightPhaseDescription IN ('Take-off', 'Climbing', 'Descent', 'Approach', 'Landing')
+GROUP BY 
+    YEAR(f.FlightDate),
+    fp.FlightPhaseDescription
+HAVING 
+    fp.FlightPhaseDescription IN ('Take-off', 'Climbing', 'Descent', 'Approach', 'Landing')
+ORDER BY 
+    YEAR(F.FlightDate), FP.FlightPhaseDescription;
+```
+
+```{r}
+library(ggplot2)
+library(DBI)
+
+query <- "
+SELECT 
+    YEAR(f.FlightDate) AS Year,
+    fp.FlightPhaseDescription,
+    COUNT(*) AS NumberOfIncidents
+FROM 
+    BirdStrikeEvent bse
+JOIN 
+    Flight f ON bse.FlightID = f.FlightID
+JOIN 
+    FlightPhase fp ON bse.PhaseID = fp.PhaseID
+WHERE 
+    YEAR(f.FlightDate) BETWEEN 2008 AND 2011
+    AND fp.FlightPhaseDescription IN ('Take-off', 'Climbing', 'Descent', 'Approach', 'Landing')
+GROUP BY 
+    YEAR(f.FlightDate),
+    fp.FlightPhaseDescription
+HAVING 
+    fp.FlightPhaseDescription IN ('Take-off', 'Climbing', 'Descent', 'Approach', 'Landing')
+ORDER BY 
+    YEAR(F.FlightDate), FP.FlightPhaseDescription;
+"
+
+data <- dbGetQuery(con, query)
+
+ggplot(data, aes(x=factor(Year), y=NumberOfIncidents, fill=FlightPhaseDescription)) + 
+  geom_bar(stat="identity", position="dodge") +
+  labs(title="Bird Strike Incidents per Year (2008-2011)", 
+       x="Year", 
+       y="Number of Incidents") +
+  scale_fill_brewer(palette="Set2") +
+  theme_minimal()
+
+
+```
+
+#### Create a stored procedure in MySQL (note that if you used SQLite, then you cannot complete this step) that removes a bird strike incident from the database. You may decide what you need to pass to the stored procedure to remove a bird strike incident, *e.g.*, departure airport, airlines, or some ID. Show that the deletion worked as expected.
+
+List a RecordID to future verification
+
+```{sql connection=con}
+SELECT * FROM BirdStrikeEvent WHERE RecordID = 1195;
+```
+
+Create a procedure table
+
+```{sql connection=con}
+CREATE PROCEDURE DeleteBirdStrikeEvent(IN incidentRecordID INT)
+BEGIN
+  DELETE FROM BirdStrikeEvent WHERE RecordID = incidentRecordID;
+END 
+```
+
+To invoke the procedure and remove a bird strike event with, for example, RecordID = 5:
+
+```{sql connection=con}
+CALL DeleteBirdStrikeEvent(1195);
+```
+
+To verify the deletion:
+
+```{sql connection=con}
+SELECT * FROM BirdStrikeEvent WHERE RecordID = 1195;
+```
+
+```{r}
+# Close the connection
+dbDisconnect(con)
+```

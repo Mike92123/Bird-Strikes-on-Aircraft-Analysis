@@ -1,0 +1,1548 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Bird Strikes on AirCraft Analysis   by Group 5},
+  pdfauthor={Mingxi Li (li.mingxi1@northeastern.edu); Si Wu (wu.si3@northeastern.edu); Zheng Zheng (zheng.zheng2@northeastern.edu); Jiawei Zhou (zhou.jiaw@northeastern.edu)},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Bird Strikes on AirCraft Analysis {by Group 5}}
+\author{Mingxi Li
+(\href{mailto:li.mingxi1@northeastern.edu}{\nolinkurl{li.mingxi1@northeastern.edu}}) \and Si
+Wu
+(\href{mailto:wu.si3@northeastern.edu}{\nolinkurl{wu.si3@northeastern.edu}}) \and Zheng
+Zheng
+(\href{mailto:zheng.zheng2@northeastern.edu}{\nolinkurl{zheng.zheng2@northeastern.edu}}) \and Jiawei
+Zhou
+(\href{mailto:zhou.jiaw@northeastern.edu}{\nolinkurl{zhou.jiaw@northeastern.edu}})}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+Bird strikes have been a matter of concern for the aviation industry
+since its inception. These events, which refer to the collision of a
+bird with an aircraft, can result in substantial financial losses and
+potential risks to safety. As the aviation industry grows, understanding
+and mitigating bird strikes becomes more crucial, especially considering
+the rise in global air traffic.
+
+In this project, our group - Group 5, dives deep into the data related
+to bird strikes.Our primary aim is to analyze the patterns of bird
+strikes on aircrafts across different years, especially focusing on
+various flight phases. By doing so, we hope to identify high-risk
+factors and periods associated with these incidents.''
+
+With this analysis, we hope to contribute valuable insights that can
+assist airlines, pilots, and airport authorities in understanding the
+dynamics of bird strikes better. Our findings might pave the way for
+innovative solutions to tackle this persistent challenge in the aviation
+industry.
+
+Source data: FAA{[}1{]} The data for our analysis is sourced from a
+comprehensive database that logs bird strikes on aircrafts. This
+database provides detailed insights on the various factors and
+conditions under which these incidents occur, making it a rich source
+for our study
+
+\hypertarget{build-erd-model-and-relational-schema}{%
+\subsection{Build ERD Model and Relational
+Schema}\label{build-erd-model-and-relational-schema}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The conceptual model as a Crow's Foot ERD - Zheng Zheng
+
+  \includegraphics{Conceptual Model (crow\textquotesingle{}s foot).png}
+\item
+  The logical model as a Crow's Feet Relational Schema - Zheng Zheng
+
+  \includegraphics{Database ER diagram (crow\textquotesingle{}s foot).png}
+\end{enumerate}
+
+\hypertarget{create-the-database}{%
+\subsection{Create the database}\label{create-the-database}}
+
+\#\#\#Connect to MySQL server (Remember to change the password for your
+own laptop)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load the required library}
+\FunctionTok{library}\NormalTok{(RMySQL)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: DBI
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Settings}
+\NormalTok{host }\OtherTok{\textless{}{-}} \StringTok{"localhost"}
+\NormalTok{port }\OtherTok{\textless{}{-}} \DecValTok{3306}
+\NormalTok{user }\OtherTok{\textless{}{-}} \StringTok{"root"}
+\NormalTok{password }\OtherTok{\textless{}{-}} \StringTok{""}
+
+\CommentTok{\# Create a connection}
+\NormalTok{con }\OtherTok{\textless{}{-}} \FunctionTok{dbConnect}\NormalTok{(}\FunctionTok{MySQL}\NormalTok{(), }\AttributeTok{user=}\StringTok{\textquotesingle{}root\textquotesingle{}}\NormalTok{, }
+                 \AttributeTok{password=}\StringTok{\textquotesingle{}Zz19920608!\textquotesingle{}}\NormalTok{, }\AttributeTok{host=}\StringTok{\textquotesingle{}localhost\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Create the database}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP DATABASE IF EXISTS BirdStrikesOnAircraft"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE DATABASE BirdStrikesOnAircraft"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use the created database}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"USE BirdStrikesOnAircraft"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\hypertarget{create-the-tables}{%
+\subsubsection{Create the tables}\label{create-the-tables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 9. Airline/Operator}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Airline\_Operator"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Airline\_Operator(}
+\StringTok{    Airline\_OperatorID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    Airline\_OperatorName VARCHAR(255)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. Aircraft}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Aircraft"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Aircraft(}
+\StringTok{    AircraftID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    Type VARCHAR(255),}
+\StringTok{    Make\_Model VARCHAR(255),}
+\StringTok{    Number\_of\_Engines INTEGER,}
+\StringTok{    Airline\_OperatorID INTEGER,}
+\StringTok{    IsLarge VARCHAR(255),}
+\StringTok{    FOREIGN KEY (Airline\_OperatorID) REFERENCES Airline\_Operator(Airline\_OperatorID)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. Airport}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Airport"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Airport(}
+\StringTok{    AirportID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    AirportName VARCHAR(255)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 5. SkyConditions}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS SkyConditions"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE SkyConditions(}
+\StringTok{    SkyConditionID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    SkyConditionDescription VARCHAR(255)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4. FlightPhase}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS FlightPhase"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE FlightPhase(}
+\StringTok{    PhaseID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    FlightPhaseDescription VARCHAR(255)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 6. Wildlife}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Wildlife"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Wildlife(}
+\StringTok{    WildlifeID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    WildlifeSpecies VARCHAR(255),}
+\StringTok{    WildlifeSize VARCHAR(50)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 8. Effect}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Effect"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Effect(}
+\StringTok{    EffectID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    EffectDescription VARCHAR(255)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. Flight}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS Flight"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE Flight(}
+\StringTok{    FlightID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    FlightDate DATE,}
+\StringTok{    OriginState VARCHAR(255),}
+\StringTok{    AircraftID INTEGER,}
+\StringTok{    AirportID INTEGER,}
+\StringTok{    FOREIGN KEY (AircraftID) REFERENCES Aircraft(AircraftID),}
+\StringTok{    FOREIGN KEY (AirportID) REFERENCES Airport(AirportID)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 7. BirdStrikeEvent}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DROP TABLE IF EXISTS BirdStrikeEvent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"CREATE TABLE BirdStrikeEvent(}
+\StringTok{    RecordID INTEGER AUTO\_INCREMENT PRIMARY KEY,}
+\StringTok{    WildlifeID INTEGER,}
+\StringTok{    FlightID INTEGER,}
+\StringTok{    PhaseID INTEGER,}
+\StringTok{    SkyConditionID INTEGER,}
+\StringTok{    EffectID INTEGER,}
+\StringTok{    IndicatedDamage BOOLEAN,}
+\StringTok{    AltitudeBin VARCHAR(100),}
+\StringTok{    FeetAboveGround INTEGER,}
+\StringTok{    NumberOfPeopleInjured INTEGER,}
+\StringTok{    Costs DECIMAL(12,2),}
+\StringTok{    PilotWarned VARCHAR(100),}
+\StringTok{    RemainsCollected VARCHAR(100),}
+\StringTok{    RemainsSent VARCHAR(100),}
+\StringTok{    Remark TEXT,}
+\StringTok{    NumberStruckRange VARCHAR(100),}
+\StringTok{    NumberStruckActual INTEGER,}
+\StringTok{    FOREIGN KEY (WildlifeID) REFERENCES Wildlife(WildlifeID),}
+\StringTok{    FOREIGN KEY (FlightID) REFERENCES Flight(FlightID),}
+\StringTok{    FOREIGN KEY (PhaseID) REFERENCES FlightPhase(PhaseID),}
+\StringTok{    FOREIGN KEY (SkyConditionID) REFERENCES SkyConditions(SkyConditionID),}
+\StringTok{    FOREIGN KEY (EffectID) REFERENCES Effect(EffectID)}
+\StringTok{)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\hypertarget{load-the-bird-strikes-csv-file-into-r-and-populate-the-tables-with-the-data.}{%
+\subsection{Load the Bird Strikes CSV file into R and populate the
+tables with the
+data.}\label{load-the-bird-strikes-csv-file-into-r-and-populate-the-tables-with-the-data.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DBI)}
+
+\CommentTok{\# Load data from CSV}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}BirdStrikesData.csv\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(csv\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Record.ID"                              
+##  [2] "Aircraft..Type"                         
+##  [3] "Airport..Name"                          
+##  [4] "Altitude.bin"                           
+##  [5] "Aircraft..Make.Model"                   
+##  [6] "Wildlife..Number.struck"                
+##  [7] "Wildlife..Number.Struck.Actual"         
+##  [8] "Effect..Impact.to.flight"               
+##  [9] "FlightDate"                             
+## [10] "Effect..Indicated.Damage"               
+## [11] "Aircraft..Number.of.engines."           
+## [12] "Aircraft..Airline.Operator"             
+## [13] "Origin.State"                           
+## [14] "When..Phase.of.flight"                  
+## [15] "Conditions..Precipitation"              
+## [16] "Remains.of.wildlife.collected."         
+## [17] "Remains.of.wildlife.sent.to.Smithsonian"
+## [18] "Remarks"                                
+## [19] "Wildlife..Size"                         
+## [20] "Conditions..Sky"                        
+## [21] "Wildlife..Species"                      
+## [22] "Pilot.warned.of.birds.or.wildlife."     
+## [23] "Cost..Total.."                          
+## [24] "Feet.above.ground"                      
+## [25] "Number.of.people.injured"               
+## [26] "Is.Aircraft.Large."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(csv\_data) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"RecordID"}\NormalTok{, }
+  \StringTok{"Type"}\NormalTok{, }
+  \StringTok{"AirportName"}\NormalTok{, }
+  \StringTok{"AltitudeBin"}\NormalTok{, }
+  \StringTok{"Make\_Model"}\NormalTok{, }
+  \StringTok{"NumberStruckRange"}\NormalTok{, }
+  \StringTok{"NumberStruckActual"}\NormalTok{, }
+  \StringTok{"EffectDescription"}\NormalTok{, }
+  \StringTok{"FlightDate"}\NormalTok{, }
+  \StringTok{"IndicatedDamage"}\NormalTok{, }
+  \StringTok{"NumberOfEngines"}\NormalTok{, }
+  \StringTok{"Airline\_OperatorName"}\NormalTok{, }
+  \StringTok{"OriginState"}\NormalTok{, }
+  \StringTok{"FlightPhaseDescription"}\NormalTok{, }
+  \StringTok{"Precipitation"}\NormalTok{, }
+  \StringTok{"RemainsCollected"}\NormalTok{, }
+  \StringTok{"RemainsSent"}\NormalTok{,}
+  \StringTok{"Remarks"}\NormalTok{,}
+  \StringTok{"WildlifeSize"}\NormalTok{,}
+  \StringTok{"SkyConditionDescription"}\NormalTok{,}
+  \StringTok{"WildlifeSpecies"}\NormalTok{,}
+  \StringTok{"PilotWarned"}\NormalTok{,}
+  \StringTok{"Costs"}\NormalTok{,}
+  \StringTok{"FeetAboveGround"}\NormalTok{,}
+  \StringTok{"NumberOfPeopleInjured"}\NormalTok{,}
+  \StringTok{"IsLarge"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aircraft Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{Type }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Type)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{Make\_Model }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Make\_Model)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{NumberOfEngines }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{NumberOfEngines))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{IsLarge }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{IsLarge)}
+
+\CommentTok{\# Airport Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{AirportName }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{AirportName)}
+
+\CommentTok{\# Flight Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate, }\AttributeTok{format=}\StringTok{"\%m/\%d/\%Y"}\NormalTok{)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{OriginState }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{OriginState)}
+
+\CommentTok{\# FlightPhase Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{FlightPhaseDescription }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{FlightPhaseDescription)}
+
+\CommentTok{\# SkyConditions Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{SkyConditionDescription }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{SkyConditionDescription)}
+
+\CommentTok{\# Wildlife Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{WildlifeSpecies }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{WildlifeSpecies)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{WildlifeSize }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{WildlifeSize)}
+
+\CommentTok{\# BirdStrikeEvent Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{AltitudeBin }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{AltitudeBin)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{FeetAboveGround }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{FeetAboveGround))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{NumberOfPeopleInjured }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{NumberOfPeopleInjured))}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{Costs }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Costs))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: NAs introduced by coercion
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{PilotWarned }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{PilotWarned)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{RemainsCollected }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{RemainsCollected)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{RemainsSent }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{RemainsSent)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{Remarks }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Remarks)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckRange }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckRange)}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckActual }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckActual))}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{IndicatedDamage }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{IndicatedDamage }\SpecialCharTok{==} \StringTok{\textquotesingle{}Caused damage\textquotesingle{}}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Effect Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{EffectDescription }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{EffectDescription)}
+
+\CommentTok{\# Airline/Operator Table}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{Airline\_OperatorName }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Airline\_OperatorName)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Identify columns with categorical data }
+\NormalTok{categorical\_cols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Type"}\NormalTok{, }\StringTok{"AirportName"}\NormalTok{, }\StringTok{"AltitudeBin"}\NormalTok{, }\StringTok{"Make\_Model"}\NormalTok{, }\StringTok{"EffectDescription"}\NormalTok{, }
+  \StringTok{"OriginState"}\NormalTok{, }\StringTok{"FlightPhaseDescription"}\NormalTok{, }\StringTok{"Precipitation"}\NormalTok{, }\StringTok{"RemainsCollected"}\NormalTok{, }
+  \StringTok{"RemainsSent"}\NormalTok{, }\StringTok{"Remarks"}\NormalTok{, }\StringTok{"WildlifeSize"}\NormalTok{, }\StringTok{"SkyConditionDescription"}\NormalTok{, }\StringTok{"WildlifeSpecies"}\NormalTok{, }
+  \StringTok{"PilotWarned"}\NormalTok{, }\StringTok{"IsLarge"}\NormalTok{, }\StringTok{"Airline\_OperatorName"}\NormalTok{, }\StringTok{"NumberStruckRange"}
+\NormalTok{)}
+
+\CommentTok{\# Replace NA values with \textquotesingle{}Unknown\textquotesingle{} for these columns}
+\NormalTok{csv\_data[categorical\_cols] }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(csv\_data[categorical\_cols], }\ControlFlowTok{function}\NormalTok{(col) \{}
+    \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(col)}\SpecialCharTok{|}\NormalTok{ col }\SpecialCharTok{==} \StringTok{""}\NormalTok{, }\StringTok{\textquotesingle{}Unknown\textquotesingle{}}\NormalTok{, col)}
+\NormalTok{\})}
+
+\CommentTok{\# Identify columns with numerical data}
+\NormalTok{numerical\_cols }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"RecordID"}\NormalTok{, }\StringTok{"NumberStruckActual"}\NormalTok{, }\StringTok{"NumberOfEngines"}\NormalTok{, }\StringTok{"Costs"}\NormalTok{, }
+  \StringTok{"FeetAboveGround"}\NormalTok{, }\StringTok{"NumberOfPeopleInjured"}
+\NormalTok{)}
+
+\CommentTok{\# Replace \textquotesingle{}Unknown\textquotesingle{} or other non{-}date values in FlightDate with \textquotesingle{}1900{-}01{-}01\textquotesingle{}}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate[csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate }\SpecialCharTok{==} \StringTok{""}  \SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"\^{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}{-}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}{-}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate)] }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}1900{-}01{-}01\textquotesingle{}}
+
+\CommentTok{\# Replace NA values with 0 for these columns}
+\NormalTok{csv\_data[numerical\_cols] }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(csv\_data[numerical\_cols], }\ControlFlowTok{function}\NormalTok{(col) \{}
+    \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(col)}\SpecialCharTok{|}\NormalTok{ col }\SpecialCharTok{==} \StringTok{""}\NormalTok{, }\DecValTok{0}\NormalTok{, col)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Airline/Operator IDs}
+\NormalTok{airline\_operator\_ids }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{Airline\_OperatorName)}
+\NormalTok{airline\_operator\_ids }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Airline\_OperatorID =} \FunctionTok{seq\_along}\NormalTok{(airline\_operator\_ids),}
+                                   \AttributeTok{Airline\_OperatorName =}\NormalTok{ airline\_operator\_ids)}
+
+\CommentTok{\# Aircraft IDs}
+\NormalTok{aircraft\_data }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Type"}\NormalTok{, }\StringTok{"Make\_Model"}\NormalTok{, }\StringTok{"NumberOfEngines"}\NormalTok{, }\StringTok{"Airline\_OperatorName"}\NormalTok{, }\StringTok{"IsLarge"}\NormalTok{)])}
+\NormalTok{aircraft\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(aircraft\_data, airline\_operator\_ids, }\AttributeTok{by=}\StringTok{"Airline\_OperatorName"}\NormalTok{)}
+\NormalTok{aircraft\_data}\SpecialCharTok{$}\NormalTok{AircraftID }\OtherTok{\textless{}{-}} \FunctionTok{seq\_along}\NormalTok{(aircraft\_data}\SpecialCharTok{$}\NormalTok{Type)}
+
+\CommentTok{\# Airport IDs}
+\NormalTok{airport\_ids }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{AirportName)}
+\NormalTok{airport\_ids }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{AirportID =} \FunctionTok{seq\_along}\NormalTok{(airport\_ids), }\AttributeTok{AirportName =}\NormalTok{ airport\_ids)}
+
+\CommentTok{\# FlightPhase IDs}
+\NormalTok{flight\_phase\_ids }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{FlightPhaseDescription)}
+\NormalTok{flight\_phase\_ids }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{PhaseID =} \FunctionTok{seq\_along}\NormalTok{(flight\_phase\_ids), }\AttributeTok{FlightPhaseDescription =}\NormalTok{ flight\_phase\_ids)}
+
+\CommentTok{\# SkyConditions IDs}
+\NormalTok{sky\_condition\_ids }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{SkyConditionDescription)}
+\NormalTok{sky\_condition\_ids }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{SkyConditionID =} \FunctionTok{seq\_along}\NormalTok{(sky\_condition\_ids), }\AttributeTok{SkyConditionDescription =}\NormalTok{ sky\_condition\_ids)}
+
+\CommentTok{\# Wildlife IDs}
+\NormalTok{wildlife\_data }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"WildlifeSpecies"}\NormalTok{, }\StringTok{"WildlifeSize"}\NormalTok{)])}
+\NormalTok{wildlife\_data}\SpecialCharTok{$}\NormalTok{WildlifeID }\OtherTok{\textless{}{-}} \FunctionTok{seq\_along}\NormalTok{(wildlife\_data}\SpecialCharTok{$}\NormalTok{WildlifeSpecies)}
+
+\CommentTok{\# Effect IDs}
+\NormalTok{effect\_ids }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{EffectDescription)}
+\NormalTok{effect\_ids }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{EffectID =} \FunctionTok{seq\_along}\NormalTok{(effect\_ids), }\AttributeTok{EffectDescription =}\NormalTok{ effect\_ids)}
+
+\CommentTok{\# Generating FlightID for each row in the csv\_data dataframe}
+\NormalTok{csv\_data}\SpecialCharTok{$}\NormalTok{FlightID }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(csv\_data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Merge Airline/Operator IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, airline\_operator\_ids, }\AttributeTok{by=}\StringTok{"Airline\_OperatorName"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge Aircraft IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, aircraft\_data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Type"}\NormalTok{, }\StringTok{"Make\_Model"}\NormalTok{, }\StringTok{"NumberOfEngines"}\NormalTok{, }\StringTok{"Airline\_OperatorID"}\NormalTok{, }\StringTok{"IsLarge"}\NormalTok{, }\StringTok{"AircraftID"}\NormalTok{)],}
+                 \AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"Type"}\NormalTok{, }\StringTok{"Make\_Model"}\NormalTok{, }\StringTok{"NumberOfEngines"}\NormalTok{, }\StringTok{"Airline\_OperatorID"}\NormalTok{, }\StringTok{"IsLarge"}\NormalTok{), }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge Airport IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, airport\_ids, }\AttributeTok{by=}\StringTok{"AirportName"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge FlightPhase IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, flight\_phase\_ids, }\AttributeTok{by=}\StringTok{"FlightPhaseDescription"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge SkyConditions IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, sky\_condition\_ids, }\AttributeTok{by=}\StringTok{"SkyConditionDescription"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge Wildlife IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, wildlife\_data, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"WildlifeSpecies"}\NormalTok{, }\StringTok{"WildlifeSize"}\NormalTok{), }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Merge Effect IDs}
+\NormalTok{csv\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(csv\_data, effect\_ids, }\AttributeTok{by=}\StringTok{"EffectDescription"}\NormalTok{, }\AttributeTok{all.x =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear data from tables}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM BirdStrikeEvent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Flight"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Wildlife"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM SkyConditions"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM FlightPhase"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Effect"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Aircraft"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Airport"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Airline\_Operator"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#1. Airline/Operator}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(airline\_operator\_ids)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Airline\_Operator (Airline\_OperatorID, Airline\_OperatorName) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{,}
+\NormalTok{                   airline\_operator\_ids}\SpecialCharTok{$}\NormalTok{Airline\_OperatorID[i], airline\_operator\_ids}\SpecialCharTok{$}\NormalTok{Airline\_OperatorName[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Insert data into Airline/Operator}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(aircraft\_data)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Aircraft (AircraftID, Type, Make\_Model, Number\_of\_Engines, Airline\_OperatorID, IsLarge) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \%d, \%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{,}
+\NormalTok{                   aircraft\_data}\SpecialCharTok{$}\NormalTok{AircraftID[i], aircraft\_data}\SpecialCharTok{$}\NormalTok{Type[i], aircraft\_data}\SpecialCharTok{$}\NormalTok{Make\_Model[i], aircraft\_data}\SpecialCharTok{$}\NormalTok{NumberOfEngines[i],}
+\NormalTok{                   aircraft\_data}\SpecialCharTok{$}\NormalTok{Airline\_OperatorID[i], aircraft\_data}\SpecialCharTok{$}\NormalTok{IsLarge[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Insert data into Airport}
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM Airport"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{escape\_quotes }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(string) \{}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{gsub}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, }\StringTok{"\textquotesingle{}\textquotesingle{}"}\NormalTok{, string))}
+\NormalTok{\}}
+
+\CommentTok{\# Insert data into Airport}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(airport\_ids)) \{}
+\NormalTok{  airport\_name\_escaped }\OtherTok{\textless{}{-}} \FunctionTok{escape\_quotes}\NormalTok{(airport\_ids}\SpecialCharTok{$}\NormalTok{AirportName[i])}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Airport (AirportID, AirportName) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{, }
+\NormalTok{                   airport\_ids}\SpecialCharTok{$}\NormalTok{AirportID[i], airport\_name\_escaped)}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4. FlightPhase Table}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(flight\_phase\_ids)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO FlightPhase (PhaseID, FlightPhaseDescription) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{, }
+\NormalTok{                   flight\_phase\_ids}\SpecialCharTok{$}\NormalTok{PhaseID[i], flight\_phase\_ids}\SpecialCharTok{$}\NormalTok{FlightPhaseDescription[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 5. SkyConditions Table}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(sky\_condition\_ids)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO SkyConditions (SkyConditionID, SkyConditionDescription) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{, }
+\NormalTok{                   sky\_condition\_ids}\SpecialCharTok{$}\NormalTok{SkyConditionID[i], sky\_condition\_ids}\SpecialCharTok{$}\NormalTok{SkyConditionDescription[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#6. Wildlife Table}
+\NormalTok{escape\_quotes }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(string) \{}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{gsub}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, }\StringTok{"\textquotesingle{}\textquotesingle{}"}\NormalTok{, string))}
+\NormalTok{\}}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(wildlife\_data)) \{}
+\NormalTok{  species\_escaped }\OtherTok{\textless{}{-}} \FunctionTok{escape\_quotes}\NormalTok{(wildlife\_data}\SpecialCharTok{$}\NormalTok{WildlifeSpecies[i])}
+\NormalTok{  size\_escaped }\OtherTok{\textless{}{-}} \FunctionTok{escape\_quotes}\NormalTok{(wildlife\_data}\SpecialCharTok{$}\NormalTok{WildlifeSize[i])}
+
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Wildlife (WildlifeID, WildlifeSpecies, WildlifeSize) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{, }
+\NormalTok{                   wildlife\_data}\SpecialCharTok{$}\NormalTok{WildlifeID[i], species\_escaped, size\_escaped)}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Insert data into Flight table}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(csv\_data)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Flight (FlightID, FlightDate, OriginState, AircraftID, AirportID) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \%d, \%d)"}\NormalTok{, }
+\NormalTok{                   csv\_data}\SpecialCharTok{$}\NormalTok{FlightID[i], csv\_data}\SpecialCharTok{$}\NormalTok{FlightDate[i], }\FunctionTok{escape\_quotes}\NormalTok{(csv\_data}\SpecialCharTok{$}\NormalTok{OriginState[i]), csv\_data}\SpecialCharTok{$}\NormalTok{AircraftID[i], csv\_data}\SpecialCharTok{$}\NormalTok{AirportID[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Insert the data into the Effect table}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(effect\_ids)) \{}
+\NormalTok{    query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO Effect (EffectID, EffectDescription) VALUES (\%d, \textquotesingle{}\%s\textquotesingle{})"}\NormalTok{, }
+\NormalTok{                     effect\_ids}\SpecialCharTok{$}\NormalTok{EffectID[i], effect\_ids}\SpecialCharTok{$}\NormalTok{EffectDescription[i])}
+    \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Insert data into BirdStrikeEvent}
+\NormalTok{sanitize\_string }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input\_string) \{}
+  \CommentTok{\# Replace single quotes with two single quotes for SQL}
+\NormalTok{  output\_string }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, }\StringTok{"\textquotesingle{}\textquotesingle{}"}\NormalTok{, input\_string)}
+  
+  \CommentTok{\# Add more replacements as needed}
+  
+  \FunctionTok{return}\NormalTok{(output\_string)}
+\NormalTok{\}}
+
+\CommentTok{\# Apply the function to character columns in your dataframe}
+\NormalTok{char\_cols }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(csv\_data, is.character)}
+\NormalTok{csv\_data[char\_cols] }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(csv\_data[char\_cols], sanitize\_string)}
+
+\FunctionTok{dbGetQuery}\NormalTok{(con, }\StringTok{"DELETE FROM BirdStrikeEvent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data frame with 0 columns and 0 rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(csv\_data)) \{}
+\NormalTok{  query }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"INSERT INTO BirdStrikeEvent (RecordID, WildlifeID, FlightID, PhaseID, SkyConditionID, EffectID, IndicatedDamage, AltitudeBin, FeetAboveGround, NumberOfPeopleInjured, Costs, PilotWarned, RemainsCollected, RemainsSent, Remark, NumberStruckRange, NumberStruckActual) VALUES (\%d, \%d, \%d, \%d, \%d, \%d, \%d, \textquotesingle{}\%s\textquotesingle{}, \%d, \%d, \%.2f, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \textquotesingle{}\%s\textquotesingle{}, \%d)"}\NormalTok{, }
+\NormalTok{                   csv\_data}\SpecialCharTok{$}\NormalTok{RecordID[i], csv\_data}\SpecialCharTok{$}\NormalTok{WildlifeID[i], csv\_data}\SpecialCharTok{$}\NormalTok{FlightID[i], csv\_data}\SpecialCharTok{$}\NormalTok{PhaseID[i], csv\_data}\SpecialCharTok{$}\NormalTok{SkyConditionID[i], csv\_data}\SpecialCharTok{$}\NormalTok{EffectID[i], csv\_data}\SpecialCharTok{$}\NormalTok{IndicatedDamage[i], csv\_data}\SpecialCharTok{$}\NormalTok{AltitudeBin[i], csv\_data}\SpecialCharTok{$}\NormalTok{FeetAboveGround[i], csv\_data}\SpecialCharTok{$}\NormalTok{NumberOfPeopleInjured[i], csv\_data}\SpecialCharTok{$}\NormalTok{Costs[i], csv\_data}\SpecialCharTok{$}\NormalTok{PilotWarned[i], csv\_data}\SpecialCharTok{$}\NormalTok{RemainsCollected[i], csv\_data}\SpecialCharTok{$}\NormalTok{RemainsSent[i], csv\_data}\SpecialCharTok{$}\NormalTok{Remarks[i], csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckRange[i], csv\_data}\SpecialCharTok{$}\NormalTok{NumberStruckActual[i])}
+  \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analysis-tasks---si-wu-and-jiawei-zhou}{%
+\subsection{Analysis Tasks - Si Wu and Jiawei
+Zhou}\label{analysis-tasks---si-wu-and-jiawei-zhou}}
+
+\hypertarget{create-a-sql-query-against-your-database-to-find-the-number-of-bird-strike-incidents-for-each-airline-upon-take-off-or-climb.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}{%
+\section{Create a SQL query against your database to find the number of
+bird strike incidents for each airline upon take-off or climb. Include
+all airlines. You may either use a \{sql\} code chunk or an R function
+to execute the query. It must be a single
+query.}\label{create-a-sql-query-against-your-database-to-find-the-number-of-bird-strike-incidents-for-each-airline-upon-take-off-or-climb.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} 
+\NormalTok{    ao.Airline\_OperatorName }\KeywordTok{AS}\NormalTok{ Airline,}
+    \FunctionTok{COUNT}\NormalTok{(}\OperatorTok{*}\NormalTok{) }\KeywordTok{AS}\NormalTok{ NumberOfIncidents}
+\KeywordTok{FROM} 
+\NormalTok{    BirdStrikeEvent bse}
+\KeywordTok{JOIN} 
+\NormalTok{    Flight f }\KeywordTok{ON}\NormalTok{ bse.FlightID }\OperatorTok{=}\NormalTok{ f.FlightID}
+\KeywordTok{JOIN} 
+\NormalTok{    Aircraft ac }\KeywordTok{ON}\NormalTok{ f.AircraftID }\OperatorTok{=}\NormalTok{ ac.AircraftID}
+\KeywordTok{JOIN} 
+\NormalTok{    Airline\_Operator ao }\KeywordTok{ON}\NormalTok{ ac.Airline\_OperatorID }\OperatorTok{=}\NormalTok{ ao.Airline\_OperatorID}
+\KeywordTok{JOIN} 
+\NormalTok{    FlightPhase fp }\KeywordTok{ON}\NormalTok{ bse.PhaseID }\OperatorTok{=}\NormalTok{ fp.PhaseID}
+\KeywordTok{WHERE} 
+\NormalTok{    fp.FlightPhaseDescription }\KeywordTok{IN}\NormalTok{ (}\StringTok{\textquotesingle{}Take{-}Off\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Climb\textquotesingle{}}\NormalTok{)}
+\KeywordTok{GROUP} \KeywordTok{BY} 
+\NormalTok{    ao.Airline\_OperatorName}
+\KeywordTok{ORDER} \KeywordTok{BY} 
+\NormalTok{    NumberOfIncidents }\KeywordTok{DESC}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Displaying records 1 - 10}\tabularnewline
+\toprule()
+Airline & NumberOfIncidents \\
+\midrule()
+\endfirsthead
+\toprule()
+Airline & NumberOfIncidents \\
+\midrule()
+\endhead
+SOUTHWEST AIRLINES & 904 \\
+BUSINESS & 679 \\
+AMERICAN AIRLINES & 414 \\
+DELTA AIR LINES & 242 \\
+US AIRWAYS* & 179 \\
+US AIRWAYS & 159 \\
+AMERICAN EAGLE AIRLINES & 155 \\
+SKYWEST AIRLINES & 134 \\
+PRIVATELY OWNED & 106 \\
+JETBLUE AIRWAYS & 106 \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\KeywordTok{SELECT}\NormalTok{ AO.Airline\_OperatorName }\KeywordTok{AS}\NormalTok{ Airline,}
+       \FunctionTok{SUM}\NormalTok{(}\ControlFlowTok{CASE} \ControlFlowTok{WHEN}\NormalTok{ BE.PhaseID }\KeywordTok{IN}\NormalTok{ (}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{) }\ControlFlowTok{THEN} \DecValTok{1} \ControlFlowTok{ELSE} \DecValTok{0} \ControlFlowTok{END}\NormalTok{) }\KeywordTok{AS}\NormalTok{ BirdStrikeCount}
+\KeywordTok{FROM}\NormalTok{ Airline\_Operator }\KeywordTok{AS}\NormalTok{ AO}
+\KeywordTok{LEFT} \KeywordTok{JOIN}\NormalTok{ Aircraft }\KeywordTok{AS}\NormalTok{ A }\KeywordTok{ON}\NormalTok{ AO.Airline\_OperatorID }\OperatorTok{=}\NormalTok{ A.Airline\_OperatorID}
+\KeywordTok{LEFT} \KeywordTok{JOIN}\NormalTok{ Flight }\KeywordTok{AS}\NormalTok{ F }\KeywordTok{ON}\NormalTok{ A.AircraftID }\OperatorTok{=}\NormalTok{ F.AircraftID}
+\KeywordTok{LEFT} \KeywordTok{JOIN}\NormalTok{ BirdStrikeEvent }\KeywordTok{AS}\NormalTok{ BE }\KeywordTok{ON}\NormalTok{ F.FlightID }\OperatorTok{=}\NormalTok{ BE.FlightID}
+\KeywordTok{GROUP} \KeywordTok{BY}\NormalTok{ AO.Airline\_OperatorName}
+\KeywordTok{ORDER} \KeywordTok{BY}\NormalTok{ BirdStrikeCount }\KeywordTok{DESC}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Displaying records 1 - 10}\tabularnewline
+\toprule()
+Airline & BirdStrikeCount \\
+\midrule()
+\endfirsthead
+\toprule()
+Airline & BirdStrikeCount \\
+\midrule()
+\endhead
+SOUTHWEST AIRLINES & 1442 \\
+BUSINESS & 1343 \\
+AMERICAN AIRLINES & 771 \\
+DELTA AIR LINES & 526 \\
+AMERICAN EAGLE AIRLINES & 389 \\
+SKYWEST AIRLINES & 333 \\
+US AIRWAYS* & 284 \\
+JETBLUE AIRWAYS & 230 \\
+US AIRWAYS & 213 \\
+UNITED AIRLINES & 201 \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \OperatorTok{*} 
+\KeywordTok{FROM}\NormalTok{ FlightPhase}
+\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{8 records}\tabularnewline
+\toprule()
+PhaseID & FlightPhaseDescription \\
+\midrule()
+\endfirsthead
+\toprule()
+PhaseID & FlightPhaseDescription \\
+\midrule()
+\endhead
+1 & Climb \\
+2 & Landing Roll \\
+3 & Approach \\
+4 & Take-off run \\
+5 & Descent \\
+6 & Unknown \\
+7 & Taxi \\
+8 & Parked \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{create-a-sql-query-against-your-database-to-find-the-airports-that-had-the-most-bird-strike-incidents-during-any-flight-phase.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}{%
+\paragraph{\texorpdfstring{Create a SQL query against your database to
+find the airports that had the most bird strike incidents (during any
+flight phase). Include all airlines. You may either use a \emph{\{sql\}}
+code chunk or an R function to execute the query. It must be a single
+query.}{Create a SQL query against your database to find the airports that had the most bird strike incidents (during any flight phase). Include all airlines. You may either use a \{sql\} code chunk or an R function to execute the query. It must be a single query.}}\label{create-a-sql-query-against-your-database-to-find-the-airports-that-had-the-most-bird-strike-incidents-during-any-flight-phase.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} 
+\NormalTok{    ap.AirportName }\KeywordTok{AS}\NormalTok{ Airport,}
+    \FunctionTok{COUNT}\NormalTok{(}\OperatorTok{*}\NormalTok{) }\KeywordTok{AS}\NormalTok{ NumberOfIncidents}
+\KeywordTok{FROM} 
+\NormalTok{    BirdStrikeEvent bse}
+\KeywordTok{JOIN} 
+\NormalTok{    Flight f }\KeywordTok{ON}\NormalTok{ bse.FlightID }\OperatorTok{=}\NormalTok{ f.FlightID}
+\KeywordTok{JOIN} 
+\NormalTok{    Airport ap }\KeywordTok{ON}\NormalTok{ f.AirportID }\OperatorTok{=}\NormalTok{ ap.AirportID}
+\KeywordTok{GROUP} \KeywordTok{BY} 
+\NormalTok{    ap.AirportName}
+\KeywordTok{ORDER} \KeywordTok{BY} 
+\NormalTok{    NumberOfIncidents }\KeywordTok{DESC}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Displaying records 1 - 10}\tabularnewline
+\toprule()
+Airport & NumberOfIncidents \\
+\midrule()
+\endfirsthead
+\toprule()
+Airport & NumberOfIncidents \\
+\midrule()
+\endhead
+DALLAS/FORT WORTH INTL ARPT & 803 \\
+SACRAMENTO INTL & 676 \\
+SALT LAKE CITY INTL & 479 \\
+DENVER INTL AIRPORT & 476 \\
+KANSAS CITY INTL & 452 \\
+PHILADELPHIA INTL & 442 \\
+ORLANDO INTL & 408 \\
+BALTIMORE WASH INTL & 401 \\
+LOUISVILLE INTL ARPT & 395 \\
+JOHN F KENNEDY INTL & 390 \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{create-a-sql-query-against-your-database-to-find-the-number-of-bird-strike-incidents-by-year.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}{%
+\paragraph{\texorpdfstring{Create a SQL query against your database to
+find the number of bird strike incidents by year. Include all airlines.
+You may either use a \emph{\{sql\}} code chunk or an R function to
+execute the query. It must be a single
+query.}{Create a SQL query against your database to find the number of bird strike incidents by year. Include all airlines. You may either use a \{sql\} code chunk or an R function to execute the query. It must be a single query.}}\label{create-a-sql-query-against-your-database-to-find-the-number-of-bird-strike-incidents-by-year.-include-all-airlines.-you-may-either-use-a-sql-code-chunk-or-an-r-function-to-execute-the-query.-it-must-be-a-single-query.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} 
+    \DataTypeTok{YEAR}\NormalTok{(f.FlightDate) }\KeywordTok{AS} \DataTypeTok{Year}\NormalTok{,}
+    \FunctionTok{COUNT}\NormalTok{(}\OperatorTok{*}\NormalTok{) }\KeywordTok{AS}\NormalTok{ NumberOfStrikes}
+\KeywordTok{FROM} 
+\NormalTok{    Flight f}
+\KeywordTok{JOIN} 
+\NormalTok{    Aircraft a }\KeywordTok{ON}\NormalTok{ f.AircraftID }\OperatorTok{=}\NormalTok{ a.AircraftID}
+\KeywordTok{JOIN} 
+\NormalTok{    Airline\_Operator ao }\KeywordTok{ON}\NormalTok{ a.Airline\_OperatorID }\OperatorTok{=}\NormalTok{ ao.Airline\_OperatorID}
+\KeywordTok{JOIN} 
+\NormalTok{    BirdStrikeEvent bse }\KeywordTok{ON}\NormalTok{ f.FlightID }\OperatorTok{=}\NormalTok{ bse.FlightID}
+
+\KeywordTok{WHERE} 
+    \DataTypeTok{YEAR}\NormalTok{(f.FlightDate) }\OperatorTok{\textless{}\textgreater{}} \DecValTok{1900}
+\KeywordTok{GROUP} \KeywordTok{BY} 
+    \DataTypeTok{Year}
+\KeywordTok{ORDER} \KeywordTok{BY} 
+    \DataTypeTok{Year}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Displaying records 1 - 10}\tabularnewline
+\toprule()
+Year & NumberOfStrikes \\
+\midrule()
+\endfirsthead
+\toprule()
+Year & NumberOfStrikes \\
+\midrule()
+\endhead
+2000 & 1367 \\
+2001 & 1230 \\
+2002 & 1681 \\
+2003 & 1568 \\
+2004 & 1692 \\
+2005 & 1853 \\
+2006 & 2159 \\
+2007 & 2301 \\
+2008 & 2258 \\
+2009 & 3247 \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{using-the-above-data-build-a-column-chart-that-visualizes-the-number-of-bird-strikes-incidents-per-year-from-2008-to-2011-during-take-offclimbing-and-during-descentapproachlanding-so-you-can-compare-one-versus-the-other.-adorn-the-graph-with-appropriate-axis-labels-titles-legend-data-labels-etc.}{%
+\paragraph{Using the above data, build a column chart that visualizes
+the number of bird strikes incidents per year from 2008 to 2011 during
+take-off/climbing and during descent/approach/landing, so you can
+compare one versus the other. Adorn the graph with appropriate axis
+labels, titles, legend, data labels,
+etc.}\label{using-the-above-data-build-a-column-chart-that-visualizes-the-number-of-bird-strikes-incidents-per-year-from-2008-to-2011-during-take-offclimbing-and-during-descentapproachlanding-so-you-can-compare-one-versus-the-other.-adorn-the-graph-with-appropriate-axis-labels-titles-legend-data-labels-etc.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} 
+    \DataTypeTok{YEAR}\NormalTok{(f.FlightDate) }\KeywordTok{AS} \DataTypeTok{Year}\NormalTok{,}
+\NormalTok{    fp.FlightPhaseDescription,}
+    \FunctionTok{COUNT}\NormalTok{(}\OperatorTok{*}\NormalTok{) }\KeywordTok{AS}\NormalTok{ NumberOfIncidents}
+\KeywordTok{FROM} 
+\NormalTok{    BirdStrikeEvent bse}
+\KeywordTok{JOIN} 
+\NormalTok{    Flight f }\KeywordTok{ON}\NormalTok{ bse.FlightID }\OperatorTok{=}\NormalTok{ f.FlightID}
+\KeywordTok{JOIN} 
+\NormalTok{    FlightPhase fp }\KeywordTok{ON}\NormalTok{ bse.PhaseID }\OperatorTok{=}\NormalTok{ fp.PhaseID}
+\KeywordTok{WHERE} 
+    \DataTypeTok{YEAR}\NormalTok{(f.FlightDate) }\KeywordTok{BETWEEN} \DecValTok{2008} \KeywordTok{AND} \DecValTok{2011}
+    \KeywordTok{AND}\NormalTok{ fp.FlightPhaseDescription }\KeywordTok{IN}\NormalTok{ (}\StringTok{\textquotesingle{}Take{-}off\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Climbing\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Descent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Approach\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Landing\textquotesingle{}}\NormalTok{)}
+\KeywordTok{GROUP} \KeywordTok{BY} 
+    \DataTypeTok{YEAR}\NormalTok{(f.FlightDate),}
+\NormalTok{    fp.FlightPhaseDescription}
+\KeywordTok{HAVING} 
+\NormalTok{    fp.FlightPhaseDescription }\KeywordTok{IN}\NormalTok{ (}\StringTok{\textquotesingle{}Take{-}off\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Climbing\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Descent\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Approach\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Landing\textquotesingle{}}\NormalTok{)}
+\KeywordTok{ORDER} \KeywordTok{BY} 
+    \DataTypeTok{YEAR}\NormalTok{(F.FlightDate), FP.FlightPhaseDescription;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rlr@{}}
+\caption{8 records}\tabularnewline
+\toprule()
+Year & FlightPhaseDescription & NumberOfIncidents \\
+\midrule()
+\endfirsthead
+\toprule()
+Year & FlightPhaseDescription & NumberOfIncidents \\
+\midrule()
+\endhead
+2008 & Approach & 880 \\
+2008 & Descent & 103 \\
+2009 & Approach & 1318 \\
+2009 & Descent & 97 \\
+2010 & Approach & 1291 \\
+2010 & Descent & 80 \\
+2011 & Approach & 1277 \\
+2011 & Descent & 32 \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(DBI)}
+
+\NormalTok{query }\OtherTok{\textless{}{-}} \StringTok{"}
+\StringTok{SELECT }
+\StringTok{    YEAR(f.FlightDate) AS Year,}
+\StringTok{    fp.FlightPhaseDescription,}
+\StringTok{    COUNT(*) AS NumberOfIncidents}
+\StringTok{FROM }
+\StringTok{    BirdStrikeEvent bse}
+\StringTok{JOIN }
+\StringTok{    Flight f ON bse.FlightID = f.FlightID}
+\StringTok{JOIN }
+\StringTok{    FlightPhase fp ON bse.PhaseID = fp.PhaseID}
+\StringTok{WHERE }
+\StringTok{    YEAR(f.FlightDate) BETWEEN 2008 AND 2011}
+\StringTok{    AND fp.FlightPhaseDescription IN (\textquotesingle{}Take{-}off\textquotesingle{}, \textquotesingle{}Climbing\textquotesingle{}, \textquotesingle{}Descent\textquotesingle{}, \textquotesingle{}Approach\textquotesingle{}, \textquotesingle{}Landing\textquotesingle{})}
+\StringTok{GROUP BY }
+\StringTok{    YEAR(f.FlightDate),}
+\StringTok{    fp.FlightPhaseDescription}
+\StringTok{HAVING }
+\StringTok{    fp.FlightPhaseDescription IN (\textquotesingle{}Take{-}off\textquotesingle{}, \textquotesingle{}Climbing\textquotesingle{}, \textquotesingle{}Descent\textquotesingle{}, \textquotesingle{}Approach\textquotesingle{}, \textquotesingle{}Landing\textquotesingle{})}
+\StringTok{ORDER BY }
+\StringTok{    YEAR(F.FlightDate), FP.FlightPhaseDescription;}
+\StringTok{"}
+
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{dbGetQuery}\NormalTok{(con, query)}
+
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{factor}\NormalTok{(Year), }\AttributeTok{y=}\NormalTok{NumberOfIncidents, }\AttributeTok{fill=}\NormalTok{FlightPhaseDescription)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{, }\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Bird Strike Incidents per Year (2008{-}2011)"}\NormalTok{, }
+       \AttributeTok{x=}\StringTok{"Year"}\NormalTok{, }
+       \AttributeTok{y=}\StringTok{"Number of Incidents"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette=}\StringTok{"Set2"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{BridStrikesProject_Group5_Ed3_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\hypertarget{create-a-stored-procedure-in-mysql-note-that-if-you-used-sqlite-then-you-cannot-complete-this-step-that-removes-a-bird-strike-incident-from-the-database.-you-may-decide-what-you-need-to-pass-to-the-stored-procedure-to-remove-a-bird-strike-incident-e.g.-departure-airport-airlines-or-some-id.-show-that-the-deletion-worked-as-expected.}{%
+\paragraph{\texorpdfstring{Create a stored procedure in MySQL (note that
+if you used SQLite, then you cannot complete this step) that removes a
+bird strike incident from the database. You may decide what you need to
+pass to the stored procedure to remove a bird strike incident,
+\emph{e.g.}, departure airport, airlines, or some ID. Show that the
+deletion worked as
+expected.}{Create a stored procedure in MySQL (note that if you used SQLite, then you cannot complete this step) that removes a bird strike incident from the database. You may decide what you need to pass to the stored procedure to remove a bird strike incident, e.g., departure airport, airlines, or some ID. Show that the deletion worked as expected.}}\label{create-a-stored-procedure-in-mysql-note-that-if-you-used-sqlite-then-you-cannot-complete-this-step-that-removes-a-bird-strike-incident-from-the-database.-you-may-decide-what-you-need-to-pass-to-the-stored-procedure-to-remove-a-bird-strike-incident-e.g.-departure-airport-airlines-or-some-id.-show-that-the-deletion-worked-as-expected.}}
+
+List a RecordID to future verification
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \OperatorTok{*} \KeywordTok{FROM}\NormalTok{ BirdStrikeEvent }\KeywordTok{WHERE}\NormalTok{ RecordID }\OperatorTok{=} \DecValTok{1195}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0505}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0367}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0688}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0734}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0734}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.1009}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0275}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0780}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0321}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0826}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0872}}@{}}
+\caption{1 records}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+RecordID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+WildlifeID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FlightID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+PhaseID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SkyConditionID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+EffectID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+IndicatedDamage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+AltitudeBin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FeetAboveGround
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberOfPeopleInjured
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Costs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+PilotWarned
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsCollected
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsSent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remark
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+NumberStruckRange
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberStruckActual
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+RecordID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+WildlifeID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FlightID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+PhaseID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SkyConditionID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+EffectID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+IndicatedDamage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+AltitudeBin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FeetAboveGround
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberOfPeopleInjured
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Costs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+PilotWarned
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsCollected
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsSent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remark
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+NumberStruckRange
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberStruckActual
+\end{minipage} \\
+\midrule()
+\endhead
+1195 & 14 & 747 & 3 & 3 & 2 & 0 & \textgreater{} 1000 ft & 0 & 0 & 0 & Y
+& FALSE & FALSE & None. & 2 to 10 & 9 \\
+\bottomrule()
+\end{longtable}
+
+Create a procedure table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{CREATE} \KeywordTok{PROCEDURE}\NormalTok{ DeleteBirdStrikeEvent(}\KeywordTok{IN}\NormalTok{ incidentRecordID }\DataTypeTok{INT}\NormalTok{)}
+\ControlFlowTok{BEGIN}
+  \KeywordTok{DELETE} \KeywordTok{FROM}\NormalTok{ BirdStrikeEvent }\KeywordTok{WHERE}\NormalTok{ RecordID }\OperatorTok{=}\NormalTok{ incidentRecordID;}
+\ControlFlowTok{END} 
+\end{Highlighting}
+\end{Shaded}
+
+To invoke the procedure and remove a bird strike event with, for
+example, RecordID = 5:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{CALL}\NormalTok{ DeleteBirdStrikeEvent(}\DecValTok{1195}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+To verify the deletion:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \OperatorTok{*} \KeywordTok{FROM}\NormalTok{ BirdStrikeEvent }\KeywordTok{WHERE}\NormalTok{ RecordID }\OperatorTok{=} \DecValTok{1195}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0505}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0367}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0688}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0413}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0734}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0734}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.1009}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0275}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0780}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0550}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0321}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0826}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 32\tabcolsep) * \real{0.0872}}@{}}
+\caption{0 records}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+RecordID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+WildlifeID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FlightID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+PhaseID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SkyConditionID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+EffectID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+IndicatedDamage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+AltitudeBin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FeetAboveGround
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberOfPeopleInjured
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Costs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+PilotWarned
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsCollected
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsSent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remark
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+NumberStruckRange
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberStruckActual
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+RecordID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+WildlifeID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FlightID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+PhaseID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+SkyConditionID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+EffectID
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+IndicatedDamage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+AltitudeBin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+FeetAboveGround
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberOfPeopleInjured
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Costs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+PilotWarned
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsCollected
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+RemainsSent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remark
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+NumberStruckRange
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+NumberStruckActual
+\end{minipage} \\
+\midrule()
+\endhead
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Close the connection}
+\FunctionTok{dbDisconnect}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\end{document}
